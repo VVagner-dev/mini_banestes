@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:15
+    container_name: mini_banco_db
+    restart: always
+    environment:
+      POSTGRES_DATABASE: mini_banco_dados
+      POSTGRES_USER: wagner
+      POSTGRES_PASSWORD: "123"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/posgresql/data
+
+volumes:
+  pgdata:
