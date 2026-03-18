@@ -1,5 +1,23 @@
+# Dependências (Obrigatório)
 node_modules
-# Keep environment variables out of version control
-.env
+dist
+build
 
-/src/generated/prisma
+# Variáveis de Ambiente (Segurança Crítica)
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Prisma (Gerações locais fora do node_modules)
+/src/generated
+
+# IDEs e Sistema
+.vscode
+.idea
+.DS_Store
+*.swp
