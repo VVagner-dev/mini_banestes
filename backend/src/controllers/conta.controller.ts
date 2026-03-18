@@ -11,7 +11,7 @@ export class contaController {
         }
         catch (error) {
             console.error(error)
-            res.status(500).json({ menssage: "Erro ao criar a conta" })
+            res.status(400).json({ menssage: "Erro ao criar a conta" })
         }
     }
 
@@ -23,7 +23,7 @@ export class contaController {
         }
         catch (error) {
             console.error(error)
-            res.status(500).json({ menssage: "Erro ao depositar na conta" })
+            res.status(400).json({ menssage: "Erro ao depositar na conta" })
         }
     }
 

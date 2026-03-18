@@ -21,7 +21,9 @@ model conta {
 
   saldo Decimal @default(0)
 
-  pix pixKeys[]
+  pix                 pixKeys[]
+  transacaosEnviadas  transacao[] @relation("Pagador")
+  transacaosRecebidas transacao[] @relation("Remetente")
 
   @@map("contas")
 }
@@ -33,4 +35,19 @@ model pixKeys {
   contaId String
 
   @@map("pix_keys")
+}
+
+model transacao {
+  id String @id @default(uuid())
+
+  pagador   conta  @relation("Pagador", fields: [pagadorId], references: [id])
+  pagadorId String @map("pagador_id")
+
+  remetente   conta  @relation("Remetente", fields: [remetenteId], references: [id])
+  remetenteId String @map("remetente_id")
+
+  valor    Decimal
+  DataHora DateTime @default(now()) @map("data_hora")
+
+  @@map("transacoes")
 }

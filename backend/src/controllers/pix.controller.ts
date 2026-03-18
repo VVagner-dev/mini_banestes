@@ -11,7 +11,7 @@ export class pixController {
         }
         catch (error) {
             console.error(error)
-            res.status(200).json({ menssage: "Erro ao criar a chave pix" })
+            res.status(400).json({ menssage: "Erro ao criar a chave pix" })
         }
     }
 

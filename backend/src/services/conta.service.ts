@@ -1,4 +1,3 @@
-import type { Decimal } from "@prisma/client/runtime/library"
 import { prisma } from "../prisma.js"
 
 export async function criarConta(nome: string, cpf: string, senha: string) {
@@ -12,7 +11,7 @@ export async function criarConta(nome: string, cpf: string, senha: string) {
 
 }
 
-export async function depositar(cpf: string, deposito: Decimal) {
+export async function depositar(cpf: string, deposito: number) {
 
     return await prisma.conta.update({
         where: {
