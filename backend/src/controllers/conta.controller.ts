@@ -11,7 +11,7 @@ export class contaController {
         }
         catch (error) {
             console.error(error)
-            res.json({ menssage: "Erro ao criar a conta" })
+            res.status(500).json({ menssage: "Erro ao criar a conta" })
         }
     }
 
