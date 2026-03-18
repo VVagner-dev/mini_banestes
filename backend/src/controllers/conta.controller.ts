@@ -1,5 +1,5 @@
 import { type Request, type Response } from "express";
-import { criarConta } from "../services/conta.service.js";
+import { criarConta, depositar } from "../services/conta.service.js";
 
 export class contaController {
 
@@ -14,5 +14,20 @@ export class contaController {
             res.status(500).json({ menssage: "Erro ao criar a conta" })
         }
     }
+
+    static async depositar(req: Request, res: Response) {
+        const { deposito, cpf } = req.body
+        try {
+            const depositou = await depositar(cpf, deposito);
+            res.status(201).json({ depositou })
+        }
+        catch (error) {
+            console.error(error)
+            res.status(500).json({ menssage: "Erro ao depositar na conta" })
+        }
+    }
+
+
+
 
 }
