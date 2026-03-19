@@ -1,13 +1,14 @@
-import type { Decimal } from "@prisma/client/runtime/library"
 import { prisma } from "../prisma.js"
+import bcript from "bcrypt";
 
+const saltRounds = 10;
 export async function fazerPix(cpf: string, pix: string, valor: number, senha: string) {
     const pagador = await prisma.conta.findUnique({ where: { cpf: cpf } });
     const remetente = await prisma.pixKeys.findUnique({ where: { key: pix }, include: { conta: true } })
     if (pagador == null || remetente == null) {
         throw new Error("conta não encontrada")
     } else {
-        if (pagador.senha != senha) {
+        if (!(await bcript.compare(senha, pagador.senha))) {
             throw new Error("senha incorreta")
         }
         if (pagador.saldo.lessThan(valor)) {

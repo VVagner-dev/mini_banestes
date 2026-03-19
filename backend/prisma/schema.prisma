@@ -22,8 +22,9 @@ model conta {
   saldo Decimal @default(0)
 
   pix                 pixKeys[]
-  transacaosEnviadas  transacao[] @relation("Pagador")
-  transacaosRecebidas transacao[] @relation("Remetente")
+  transacaosEnviadas  transacao[]     @relation("Pagador")
+  transacaosRecebidas transacao[]     @relation("Remetente")
+  refreshTokens       refreshTokens[]
 
   @@map("contas")
 }
@@ -50,4 +51,17 @@ model transacao {
   DataHora DateTime @default(now()) @map("data_hora")
 
   @@map("transacoes")
+}
+
+model refreshTokens {
+  id    String @id @default(uuid())
+  Token String
+
+  userID String @map("user_id")
+  user   conta  @relation(fields: [userID], references: [id])
+
+  expiraEm DateTime @map("expira_em")
+  revoked  Boolean  @default(false)
+
+  @@map("refresh_tokens")
 }

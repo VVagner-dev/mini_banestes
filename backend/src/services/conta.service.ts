@@ -1,11 +1,14 @@
 import { prisma } from "../prisma.js"
+import bcript from "bcrypt"
 
+const saltRounds = 10
 export async function criarConta(nome: string, cpf: string, senha: string) {
+    const senhaCriptografada = await bcript.hash(senha, saltRounds);
     return await prisma.conta.create({
         data: {
             nome: nome,
             cpf: cpf,
-            senha: senha
+            senha: senhaCriptografada
         }
     })
 
