@@ -1,8 +1,6 @@
 import { prisma } from "../prisma.js";
 import crypto from "node:crypto"
 
-
-
 export async function criarPix(cpf: string) {
     const conta = await prisma.conta.findUnique({ where: { cpf: cpf } });
     if (conta == null) {

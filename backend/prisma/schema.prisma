@@ -55,7 +55,7 @@ model transacao {
 
 model refreshTokens {
   id    String @id @default(uuid())
-  Token String
+  Token String @unique
 
   userID String @map("user_id")
   user   conta  @relation(fields: [userID], references: [id])

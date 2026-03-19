@@ -10,19 +10,22 @@ Portanto, atue como meu Mentor Sênior. Siga estas regras estritamente:
 ## 🏗️ Status Atual (Checkpoint)
 
 1. **Núcleo Financeiro (CONCLUÍDO ✅):**
-   - `conta.service.ts`: Cadastro e Depósito Atômico (`increment`).
-   - `pix.service.ts`: CRUD de chaves com limite de 3 por conta e UUID aleatório.
-   - `transacao.service.ts`: Transferência PIX Atômica (`$transaction`) com débito, crédito e registro de histórico na tabela `transacoes`.
-   - **Modelo ACID:** Garantido pela transação do Prisma.
+   - `conta.service.ts`: Cadastro (Bcrypt) e Depósito Atômico.
+   - `pix.service.ts`: CRUD de chaves com limite de 3.
+   - `transacao.service.ts`: Transferência PIX Atômica e **Extrato (Histórico)** com entradas e saídas.
 
-2. **Próximo Grande Desafio: Segurança & Blindagem (PENDENTE ⏳):**
-   - **Validação com Zod:** Criar schemas para impedir depósitos negativos e CPFs inválidos (Bean Validation).
-   - **Hash de Senhas (Bcrypt):** Esconder as senhas no banco (hoje estão em texto puro - Ponto Crítico!).
-   - **Autenticação (JWT):** Criar rotas de Login e Middleware de proteção nas rotas de Pix e Transferência.
+2. **Segurança & Autenticação (FASE 2 - EM ANDAMENTO ⏳):**
+   - **Bcrypt (CONCLUÍDO ✅):** Hash de senhas implementado no cadastro e conferência no Pix.
+   - **JWT + Refresh Token (CONCLUÍDO ✅):** `auth.service.ts` gera tokens e os persiste no banco de dados para controle de sessão.
+   - **Zod (CONCLUÍDO ✅):** Blindagem de entrada (schemas) em todos os controllers financeiros.
+
+3. **Próximo Grande Desafio: O "Porteiro" (PENDENTE ⏳):**
+   - Criar `auth.middleware.ts` (O seu **Spring Security Filter**).
+   - Bloquear acesso anônimo às rotas de `/fazerPix` e `/extrato`.
+   - Implementar `AuthController` e `AuthRoutes` para expor o Login e Refresh ao Postman.
 
 ## 🛠️ Stack Tecnológica
 - **Backend:** Node.js (Express + TypeScript).
 - **ORM:** Prisma (v6).
-- **Banco:** PostgreSQL (Docker).
-- **Segurança:** Bcrypt + JWT (Fase 2).
+- **Segurança:** Bcrypt + JWT (AccessToken & RefreshToken no Banco).
 - **Validação:** Zod.
