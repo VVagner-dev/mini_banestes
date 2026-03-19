@@ -1,12 +1,15 @@
 import type { Decimal } from "@prisma/client/runtime/library"
 import { prisma } from "../prisma.js"
 
-export async function fazerPix(cpf: string, pix: string, valor: number) {
+export async function fazerPix(cpf: string, pix: string, valor: number, senha: string) {
     const pagador = await prisma.conta.findUnique({ where: { cpf: cpf } });
     const remetente = await prisma.pixKeys.findUnique({ where: { key: pix }, include: { conta: true } })
     if (pagador == null || remetente == null) {
         throw new Error("conta não encontrada")
     } else {
+        if (pagador.senha != senha) {
+            throw new Error("senha incorreta")
+        }
         if (pagador.saldo.lessThan(valor)) {
             throw new Error("saldo insuficiente")
         }
@@ -41,4 +44,20 @@ export async function fazerPix(cpf: string, pix: string, valor: number) {
         ])
     }
 
+}
+
+export async function verExtrato(cpf: string) {
+    const conta = await prisma.conta.findUnique({ where: { cpf: cpf } });
+    if (conta == null) {
+        throw new Error("Conta não encontrada");
+    }
+    return await prisma.transacao.findMany({
+        where: {
+            OR: [
+                { pagadorId: conta.id },
+                { remetenteId: conta.id }
+            ]
+        },
+        orderBy: { DataHora: 'desc' }
+    })
 }

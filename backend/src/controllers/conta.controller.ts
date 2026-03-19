@@ -1,10 +1,19 @@
 import { type Request, type Response } from "express";
 import { criarConta, depositar } from "../services/conta.service.js";
-
+import { depositoSchema, criarContaSchema } from "../schemas/conta.schema.js";
 export class contaController {
 
     static async criar(req: Request, res: Response) {
-        const { nome, cpf, senha } = req.body
+        const validacao = criarContaSchema.safeParse(req.body)
+
+        if (!validacao.success) {
+            return res.status(400).json({
+                message: "Dados invalidos",
+                erros: validacao.error.format()
+            })
+        }
+
+        const { nome, cpf, senha } = validacao.data
         try {
             const contaCriada = await criarConta(nome, cpf, senha);
             res.status(201).json({ contaCriada })
@@ -16,7 +25,16 @@ export class contaController {
     }
 
     static async depositar(req: Request, res: Response) {
-        const { deposito, cpf } = req.body
+        const validacao = depositoSchema.safeParse(req.body)
+
+        if (!validacao.success) {
+            return res.status(400).json({
+                message: "Dados invalidos",
+                erros: validacao.error.format()
+            })
+        }
+
+        const { deposito, cpf } = validacao.data
         try {
             const depositou = await depositar(cpf, deposito);
             res.status(201).json({ depositou })
@@ -26,6 +44,7 @@ export class contaController {
             res.status(400).json({ menssage: "Erro ao depositar na conta" })
         }
     }
+
 
 
 

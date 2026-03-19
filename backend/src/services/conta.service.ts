@@ -12,17 +12,29 @@ export async function criarConta(nome: string, cpf: string, senha: string) {
 }
 
 export async function depositar(cpf: string, deposito: number) {
-
-    return await prisma.conta.update({
-        where: {
-            cpf: cpf
-        },
-        data: {
-            saldo: {
-                increment: deposito
+    const conta = await prisma.conta.findUnique({ where: { cpf: cpf } });
+    if (conta == null) {
+        throw new Error("Conta não encontrada");
+    }
+    return await prisma.$transaction([
+        prisma.conta.update({
+            where: {
+                cpf: conta.cpf
+            },
+            data: {
+                saldo: {
+                    increment: deposito
+                }
             }
-        }
-    })
+        }),
+        prisma.transacao.create({
+            data: {
+                pagadorId: conta.id,
+                remetenteId: conta.id,
+                valor: deposito
+            }
+        })
+    ])
 
 }
 
