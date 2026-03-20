@@ -7,25 +7,27 @@ Portanto, atue como meu Mentor Sênior. Siga estas regras estritamente:
 2. Aponte erros, explique conceitos e faça analogias com **Spring Boot** (Controllers, Services, JPA).
 3. Priorize boas práticas e arquitetura em camadas.
 
-## 🏗️ Status Atual (Checkpoint)
+## 🏗️ Status Atual (Checkpoint Final do Backend)
 
 1. **Núcleo Financeiro (CONCLUÍDO ✅):**
-   - `conta.service.ts`: Cadastro (Bcrypt) e Depósito Atômico.
-   - `pix.service.ts`: CRUD de chaves com limite de 3.
-   - `transacao.service.ts`: Transferência PIX Atômica e **Extrato (Histórico)** com entradas e saídas.
+   - CRUD de Contas e Pix (limite de 3 chaves).
+   - Depósito e Transferência Atômica (`$transaction`).
+   - Extrato (Entradas e Saídas) com filtragem OR e Join de dados.
 
-2. **Segurança & Autenticação (FASE 2 - EM ANDAMENTO ⏳):**
-   - **Bcrypt (CONCLUÍDO ✅):** Hash de senhas implementado no cadastro e conferência no Pix.
-   - **JWT + Refresh Token (CONCLUÍDO ✅):** `auth.service.ts` gera tokens e os persiste no banco de dados para controle de sessão.
-   - **Zod (CONCLUÍDO ✅):** Blindagem de entrada (schemas) em todos os controllers financeiros.
+2. **Segurança & Blindagem (CONCLUÍDO ✅):**
+   - **Bcrypt:** Senhas protegidas no banco.
+   - **JWT + Refresh Token:** Controle de sessão persistente no banco.
+   - **Middleware:** Proteção de rotas e extração de usuário via Token.
+   - **Zod:** Validação completa de entrada em todas as rotas.
+   - **Swagger:** Documentação interativa completa (OAS 3.0).
 
-3. **Próximo Grande Desafio: O "Porteiro" (PENDENTE ⏳):**
-   - Criar `auth.middleware.ts` (O seu **Spring Security Filter**).
-   - Bloquear acesso anônimo às rotas de `/fazerPix` e `/extrato`.
-   - Implementar `AuthController` e `AuthRoutes` para expor o Login e Refresh ao Postman.
+3. **Fase 3: Frontend (EM ANDAMENTO ⏳):**
+   - Iniciar React + Vite + TypeScript.
+   - Consumo da API com Axios.
+   - Gerenciamento de estado de autenticação (Login/Logout).
 
 ## 🛠️ Stack Tecnológica
-- **Backend:** Node.js (Express + TypeScript).
-- **ORM:** Prisma (v6).
-- **Segurança:** Bcrypt + JWT (AccessToken & RefreshToken no Banco).
-- **Validação:** Zod.
+- **Backend:** Node.js (Express + TypeScript + Prisma).
+- **Segurança:** Bcrypt + JWT (AccessToken & RefreshToken).
+- **Frontend:** React (Vite + TypeScript).
+- **Estilo:** React-Bootstrap (a definir).
