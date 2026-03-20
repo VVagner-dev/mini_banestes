@@ -1,6 +1,6 @@
 import { type Request, type Response } from "express";
 import { fazerPix, verExtrato } from "../services/transacao.service.js";
-import { fazerPixSchema, extratoSchema } from "../schemas/transacao.schema.js";
+import { fazerPixSchema } from "../schemas/transacao.schema.js";
 
 export class TransacaoController {
 
@@ -17,8 +17,8 @@ export class TransacaoController {
                 erros: validacao.error.format()
             })
         }
-        const { pix, cpf, valor, senha } = validacao.data
-
+        const { pix, valor, senha } = validacao.data
+        const { cpf } = (req as any).user;
         try {
             const pixRealizado = await fazerPix(cpf, pix, valor, senha)
             res.status(201).json({ pix: pixRealizado })
@@ -30,16 +30,7 @@ export class TransacaoController {
     }
 
     static async extrato(req: Request, res: Response) {
-        const validacao = extratoSchema.safeParse(req.body)
-
-        if (!validacao.success) {
-            return res.status(400).json({
-                message: "Dados invalidos",
-                erros: validacao.error.format()
-            })
-        }
-        const { cpf } = validacao.data
-
+        const { cpf } = (req as any).user;
         try {
             const extrato = await verExtrato(cpf)
             res.status(201).json({ extrato: extrato })

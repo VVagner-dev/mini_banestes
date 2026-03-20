@@ -34,7 +34,8 @@ export class contaController {
             })
         }
 
-        const { deposito, cpf } = validacao.data
+        const { deposito } = validacao.data
+        const { cpf } = (req as any).user;
         try {
             const depositou = await depositar(cpf, deposito);
             res.status(201).json({ depositou })
