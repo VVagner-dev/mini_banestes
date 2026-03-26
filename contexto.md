@@ -24,13 +24,14 @@ Portanto, atue como meu Mentor Sênior. Siga estas regras estritamente:
 3. **Fase 3: Frontend (EM ANDAMENTO ⏳):**
    - **Setup Inicial:** React + Vite + TypeScript (CONCLUÍDO ✅).
    - **Serviços:** Configuração do Axios para integração com API (CONCLUÍDO ✅).
-   - **Fluxo de Acesso:** Telas de Login e Cadastro funcionais com `useState` (CONCLUÍDO ✅).
+   - **Fluxo de Acesso:** Telas de Login e Cadastro funcionais (CONCLUÍDO ✅).
    - **Navegação:** Roteamento configurado com `react-router-dom` (CONCLUÍDO ✅).
    - **Sessão:** Persistência do Token JWT no `localStorage` (CONCLUÍDO ✅).
-   - **Próximo Passo:** Criar o Dashboard e implementar a Proteção de Rotas (Private Routes).
+   - **Próximo Passo:** Dashboard e **Plano Tailwind** (Lógica primeiro, Beleza depois).
 
 ## 🛠️ Stack Tecnológica
 - **Backend:** Node.js (Express + TypeScript + Prisma).
 - **Segurança:** Bcrypt + JWT (AccessToken & RefreshToken).
 - **Frontend:** React (Vite + TypeScript + React Router + Axios).
-- **Estilo:** CSS Puro / Flexbox (em evolução).
+- **Estilo Atual:** CSS Puro / Flexbox.
+- **Estilo Futuro:** TailwindCSS (após consolidar a lógica).
