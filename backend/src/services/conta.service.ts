@@ -41,3 +41,7 @@ export async function depositar(cpf: string, deposito: number) {
 
 }
 
+export async function verConta() {
+
+}
+
