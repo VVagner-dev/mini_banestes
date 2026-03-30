@@ -47,3 +47,6 @@ contasRotas.post('/conta', contaController.criar);
  *       401: { description: "Não autorizado" }
  */
 contasRotas.post('/conta/deposito', AuthMiddlewere.authHeaderVerification, contaController.depositar);
+
+
+contasRotas.get('/conta', AuthMiddlewere.authHeaderVerification, contaController.visaoConta);

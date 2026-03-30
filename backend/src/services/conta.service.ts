@@ -41,7 +41,11 @@ export async function depositar(cpf: string, deposito: number) {
 
 }
 
-export async function verConta() {
-
+export async function verConta(cpf: string) {
+    const conta = await prisma.conta.findUnique({where: {cpf:cpf}})
+    if(conta == null){
+        throw new Error("Conta não encontrada")
+    }
+    return conta
 }
 

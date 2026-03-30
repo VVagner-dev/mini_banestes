@@ -9,3 +9,6 @@ export const criarContaSchema = z.object({
     nome: z.string().min(3),
     senha: z.string().min(6)
 })
+export const verContaSchema = z.object({
+    cpf: z.string().min(11).max(15)
+})

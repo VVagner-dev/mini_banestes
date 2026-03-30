@@ -1,6 +1,6 @@
 import { type Request, type Response } from "express";
-import { criarConta, depositar } from "../services/conta.service.js";
-import { depositoSchema, criarContaSchema } from "../schemas/conta.schema.js";
+import { criarConta, depositar, verConta } from "../services/conta.service.js";
+import { depositoSchema, criarContaSchema, verContaSchema } from "../schemas/conta.schema.js";
 export class contaController {
 
     static async criar(req: Request, res: Response) {
@@ -20,7 +20,7 @@ export class contaController {
         }
         catch (error) {
             console.error(error)
-            res.status(400).json({ menssage: "Erro ao criar a conta" })
+            res.status(400).json({ menssagem: "Erro ao criar a conta" })
         }
     }
 
@@ -42,11 +42,20 @@ export class contaController {
         }
         catch (error) {
             console.error(error)
-            res.status(400).json({ menssage: "Erro ao depositar na conta" })
+            res.status(400).json({ menssagem: "Erro ao depositar na conta" })
         }
     }
 
-
+    static async visaoConta(req: Request, res: Response){
+         const { cpf } = (req as any).user;
+        try{
+            const visaoConta = await verConta(cpf)
+            res.status(200).json({visaoConta})
+        }catch(error){
+            console.error(error)
+            res.status(400).json({menssagem: "Erro ao ver a conta"})
+        }
+    }
 
 
 
