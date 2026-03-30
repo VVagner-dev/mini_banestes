@@ -13,6 +13,8 @@ export async function fazerPix(cpf: string, pix: string, valor: number, senha: s
         }
         if (pagador.saldo.lessThan(valor)) {
             throw new Error("saldo insuficiente")
+        }if(pagador.id == remetente.conta.id){
+            throw new Error("pix para a mesma conta")
         }
         await prisma.$transaction([
             prisma.conta.update({

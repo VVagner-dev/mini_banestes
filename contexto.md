@@ -7,30 +7,31 @@ Portanto, atue como meu Mentor Sênior. Siga estas regras estritamente:
 2. Aponte erros, explique conceitos e faça analogias com **Spring Boot** (Iniciante) para reforçar meu aprendizado em arquitetura.
 3. Priorize boas práticas e arquitetura em camadas.
 
-## 🏗️ Status Atual (Checkpoint de Evolução Frontend)
+## 🏗️ Status Atual (Checkpoint de Evolução Frontend - 30/03/2026)
 
-1. **Núcleo Financeiro (CONCLUÍDO ✅):**
-   - CRUD de Contas e Pix.
-   - Depósito e Transferência Atômica.
-   - Extrato (Entradas e Saídas).
+1. **Backend Bancário (CONCLUÍDO ✅):**
+   - **Gestão de Contas:** `GET /api/conta` retornando Saldo, Nome e Chaves Pix (`include: { pix: true }`).
+   - **Transações Atômicas:** `POST /api/fazerPix` e `POST /api/conta/deposito` usando `prisma.$transaction`.
+   - **Histórico:** `GET /api/extrato` filtrando entradas e saídas (`OR` no Prisma).
+   - **Segurança:** Middlewares protegendo todas as rotas sensíveis via JWT.
 
-2. **Segurança & Blindagem (CONCLUÍDO ✅):**
-   - **Bcrypt:** Senhas protegidas.
-   - **JWT + Refresh Token:** Controle de sessão.
-   - **Axios Interceptor:** Envio automático do Token no Header (CONCLUÍDO ✅).
+2. **Frontend - Integração (CONCLUÍDO ✅):**
+   - **Dashboard Funcional:** Consumo de saldo e dados do usuário via `useEffect` e `Axios Interceptor`.
+   - **Extrato Inteligente:** Listagem com `.map()` e lógica de identificação de Entrada/Saída baseada no `meuId`.
+   - **Operações Financeiras:** Formulários de Pix e Depósito enviando dados e atualizando a interface automaticamente.
+   - **Gestão de Chaves:** Criar e Deletar chaves Pix aleatórias (limite de 3) direto no Dashboard.
+   - **Tipagem (TS):** Interfaces `Transacao` e `PixKey` garantindo a segurança dos dados no React.
 
-3. **Fase 3: Frontend (EM ANDAMENTO ⏳):**
-   - **Setup Inicial:** Vite + TypeScript (CONCLUÍDO ✅).
-   - **Fluxo de Acesso:** Login e Cadastro funcionais (CONCLUÍDO ✅).
-   - **Navegação:** Roteamento com `Link` e `Routes` (CONCLUÍDO ✅).
-   - **Dashboard:** Esqueleto criado, aguardando lógica de dados (EM ANDAMENTO ⏳).
+3. **Fase 4: Refinamento & Estética (PRÓXIMA ETAPA ⏳):**
+   - **Refino de Lógica:** Ajustar o Extrato para diferenciar Depósitos de Entradas comuns.
+   - **UX/UI:** Limpar campos de formulário após sucesso e tratar erros do backend.
+   - **Tailwind CSS:** Migrar do CSS Puro para um visual moderno e "padrão Banestes".
 
 ## 🛠️ Próximo Passo Imediato
-- Criar o endpoint `GET /api/conta` no Backend (Service -> Controller -> Routes).
-- Implementar o `useEffect` no `Dashboard.tsx` para buscar o Saldo real.
-- **Plano Tailwind:** Iniciar após a lógica do Dashboard e Pix estar sólida.
+- Iniciar a estilização com **Tailwind CSS** para transformar o esqueleto em uma aplicação visualmente profissional.
+- Refinar a lógica de ícones no Extrato (Diferenciar Depósito de Entrada).
 
-## 🛠️ Stack Tecnológica
+## 🛠️ Stack Tecnológica Atualizada
 - **Backend:** Node.js (Express + TypeScript + Prisma).
-- **Frontend:** React (Vite + TS + React Router + Axios).
-- **Estilo Atual:** CSS Puro / Flexbox.
+- **Frontend:** React (Vite + TS + Axios).
+- **Segurança:** JWT (Auth Header) + Bcrypt.
