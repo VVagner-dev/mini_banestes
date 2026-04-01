@@ -89,4 +89,4 @@ Com o servidor rodando, acesse a documentação interativa (Swagger) em:
 `http://localhost:3001/api/doc`
 
 ---
-Desenvolvido por [Seu Nome] - Março de 2026.
+Desenvolvido por Wagner Cristo - Março de 2026.
